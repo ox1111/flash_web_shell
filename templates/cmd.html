@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Command Execution</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        .command-output {
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Command Execution</h1>
+    <form method="post">
+        <input type="text" name="command" placeholder="Enter a command">
+        <input type="submit" value="Execute">
+    </form>
+    <div class="command-output">
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% elif output %}
+        <pre>{{ output }}</pre>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Browser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .function-group {
+            margin-bottom: 20px;
+        }
+
+        .function-group form {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .function-group .separator {
+            border-left: 1px solid #ccc;
+            margin: 0 10px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .breadcrumb {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .directory-list,
+        .file-list {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .directory-list h2,
+        .file-list h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .item-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .item-list li {
+            margin-bottom: 5px;
+        }
+
+        .item-list.single-line li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .item-list a {
+            text-decoration: none;
+            color: #333;
+            padding: 6px 12px;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .item-list a:hover {
+            background-color: #e0e0e0;
+        }
+
+        .view-buttons {
+            margin-bottom: 10px;
+        }
+
+        .view-buttons label {
+            margin-right: 10px;
+        }
+
+        .flash-message {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .flash-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .parent-folder {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 6px 12px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .parent-folder:hover {
+            background-color: #0056b3;
+        }
+
+        input[type="file"],
+        input[type="submit"],
+        button {
+            padding: 6px 12px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="file"]:hover,
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function openCmdPopup() {
+            window.open("{{ url_for('cmd') }}", "CMD", "width=600,height=400");
+        }
+
+        function toggleView(type, view) {
+            var itemList = document.querySelector(`.${type}-list .item-list`);
+            var radioButtons = document.querySelectorAll(`.${type}-list .view-buttons input[name="${type}-view"]`);
+
+            if (view === 'single') {
+                itemList.classList.add('single-line');
+                radioButtons[0].checked = true;
+            } else {
+                itemList.classList.remove('single-line');
+                radioButtons[1].checked = true;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>File Browser</h1>
+    <div class="function-group">
+        <form method="post" enctype="multipart/form-data" action="{{ url_for('upload') }}">
+            <input type="file" name="file">
+            <input type="submit" value="Upload">
+        </form>
+        <span class="separator"></span>
+        <button onclick="openCmdPopup()">CMD</button>
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="directory-list">
+        <h2>Directories</h2>
+        <div class="view-buttons">
+            <label>
+                <input type="radio" name="directory-view" value="single" checked onclick="toggleView('directory', 'single')">
+                한줄로 보기
+            </label>
+            <label>
+                <input type="radio" name="directory-view" value="multiple" onclick="toggleView('directory', 'multiple')">
+                여러줄 보기
+            </label>
+        </div>
+        {% if current_path != '/' %}
+        <a href="{{ url_for('index', path=current_path.rsplit('/', 1)[0]) }}" class="parent-folder">상위 폴더</a>
+        {% endif %}
+        <div class="breadcrumb">
+            <a href="{{ url_for('index', path='/') }}">Home</a>
+            {% for part in current_path.split('/') if part %}
+                <span> / </span>
+                <a href="{{ url_for('index', path=current_path.rsplit('/', loop.index)[0]) }}">{{ part }}</a>
+            {% endfor %}
+        </div>
+        <ul class="item-list single-line">
+            {% for directory in directories %}
+            <li><a href="{{ url_for('index', path=current_path + '/' + directory) }}">[{{ directory }}]</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="file-list">
+        <h2>Files</h2>
+        <div class="view-buttons">
+            <label>
+                <input type="radio" name="file-view" value="single" checked onclick="toggleView('file', 'single')">
+                한줄로 보기
+            </label>
+            <label>
+                <input type="radio" name="file-view" value="multiple" onclick="toggleView('file', 'multiple')">
+                여러줄 보기
+            </label>
+        </div>
+        </ul>
+<ul class="item-list single-line">
+    {% for file in files %}
+    <li><a href="{{ url_for('download', path=current_path.strip('/') + '/' + file) }}">{{ file }}</a></li>
+    {% endfor %}
+</ul>
+
+    </div>
+</body>
+</html>
