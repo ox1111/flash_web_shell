@@ -21,16 +21,13 @@ brew install usbmuxd
 iproxy 2222(mac port ) -> 22(ios port )
 
 iproxy 2222 22
+```
+
+[+] jailbreak된 폰에 ssh 연결하기
+```
+ssh -p 2222 root@localhost
 root/alpine
 ```
-
-[+] mac에서 usb로 웹쉘 연결 포트  설정 
-```
-iproxy 5000(mac port ) -> 5000(ios port )
-
-iproxy 5000 5000 
-```
-
 
 ## iso에서 설치
 
@@ -65,6 +62,14 @@ cd flash_web_shell
 ```
 
 ## 사용법 
+
+[+] mac에서 usb로 웹쉘 연결 포트  설정 
+```
+iproxy 5000(mac port ) -> 5000(ios port )
+
+iproxy 5000 5000 
+```
+
 [+] mac에서 usb로 웹쉘 연결 포트  설정 
 ```
 python3 app.py
