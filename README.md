@@ -18,11 +18,6 @@ brew install usbmuxd
 ## iso에서 설치
 
 [+] flask 설치
-```
-pip3 install flask
-```
-
-[+] flask 설치
 
 ```
 pip3 install flask
