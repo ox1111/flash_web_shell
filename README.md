@@ -54,6 +54,13 @@ cd flash_web_shell
 
 
 ## 사용법 
+[+] jailbreak된 폰에 ssh 연결하기
+```
+iproxy 2222(mac port ) -> 22(ios port )
+
+iproxy 2222 22
+root/alpine
+```
 
 [+] mac에서 usb로 웹쉘 연결 포트  설정 
 ```
