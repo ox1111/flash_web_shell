@@ -36,7 +36,7 @@ apt install python3
 [+] pip 설치
 
 ```
-wget https://raw.githubusercontent.com/ox1111/flash_web_shell/master/get-pip.py
+wget https://raw.githubusercontent.com/ox1111/flash_web_shell/master/get-pip.py --no-check-certificate
 python3 get-pip.py
 ```
 
