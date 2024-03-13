@@ -53,6 +53,11 @@ python3 get-pip.py
 ```
 pip3 install flask
 ```
+[+] git 설치
+
+```
+apt install git
+```
 
 [+] web shell 설치
 
