@@ -39,6 +39,10 @@ def upload():
 @app.route('/download/<path:path>')
 def download(path):
     print(f"Download requested path: {path}")  # 디버깅을 위해 경로 출력
+
+    # 현재 작업 디렉토리(pwd) 경로 제거
+    current_dir = os.getcwd()
+    normalized_path = normalized_path.replace(current_dir, '/')
     
     # 경로에서 연속된 슬래시를 단일 슬래시로 대체
     normalized_path = re.sub(r'/+', '/', path)
