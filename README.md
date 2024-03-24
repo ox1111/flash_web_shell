@@ -37,6 +37,20 @@ root/alpine
 apt install wget
 ```
 
+
+[+] gcc 설치
+
+```
+apt install gcc
+```
+
+
+[+] clang 설치
+
+```
+apt install clang
+```
+
 [+] python 설치
 ```
 apt install python3
