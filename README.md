@@ -20,12 +20,12 @@ brew install usbmuxd
 ### iproxy 2222 22 명령의 의미
 ```
 
-iproxy 2222(mac port ) ->  22(ios port )
+iproxy 2222(macbook port ) ->  22(iphone port )
 
-iproxy 2222(mac port ) [ 2222 포트 리스닝 server 역활 ]-> 22(ios port : client역활 )
+iproxy 2222(macbook port ) [ 2222 포트 리스닝 server 역활 ]-> 22(iphone port : client역활 )
 
-ssh -p 2222 root@localhost  [ 2222 서버 포트 연결 ] -> iproxy 2222(mac port ) [ 2222 포트 리스닝 server 역활 ]
- -> 22(ios port : client역활 ) -> ssl server demon연결(22 포트 리스닝)
+ssh -p 2222 root@localhost  [ 2222 서버 포트 연결 ] -> iproxy 2222(macbook port ) [ 2222 포트 리스닝 server 역활 ]
+ -> 22(iphone port : client역활 ) -> ssl server demon연결(22 포트 리스닝)
 
 
 iproxy 2222 22
