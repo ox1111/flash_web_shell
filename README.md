@@ -17,7 +17,7 @@ brew install usbmuxd
 
 ## 접속환경 
 [+] jailbreak된 폰에 ssh 연결하기
-iproxy 2222 22 명령의 의미
+### iproxy 2222 22 명령의 의미
 ```
 
 iproxy 2222(mac port ) ->  22(ios port )
