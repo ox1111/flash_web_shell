@@ -81,3 +81,13 @@ python3 app.py
 ```
 
 
+
+```
+python3 -m venv myenv
+
+source myenv/bin/activate
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3 get-pip.py
+pip3 install requests
+```
+
