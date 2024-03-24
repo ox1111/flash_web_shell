@@ -34,6 +34,13 @@ root/alpine
 [+] wget 설치
 
 ```
+apt install lsof
+```
+
+
+[+] wget 설치
+
+```
 apt install wget
 ```
 
@@ -94,7 +101,22 @@ iproxy 5000 5000
 python3 app.py
 ```
 
+[+] iphone에서 5000 포트 사용하고 있다고 하면 
+```
+lsof -i :5000
+```
 
+```
+jang-gyeongchib-ui-iPhone:~/flash_web_shell root# lsof -i :5000
+COMMAND    PID USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+python3.7 3646 root    3u  IPv4 0xd9be63abb3d08a69      0t0  TCP *:commplex-main (LISTEN)
+python3.7 3658 root    3u  IPv4 0xd9be63abb3d08a69      0t0  TCP *:commplex-main (LISTEN)
+python3.7 3658 root    4u  IPv4 0xd9be63abb3d08a69      0t0  TCP *:commplex-main (LISTEN)
+jang-gyeongchib-ui-iPhone:~/flash_web_shell root# kill -9 3646
+jang-gyeongchib-ui-iPhone:~/flash_web_shell root# kill -9 3658
+jang-gyeongchib-ui-iPhone:~/flash_web_shell root# lsof -i :5000
+jang-gyeongchib-ui-iPhone:~/flash_web_shell root# 
+```
 
 ```
 python3 -m venv myenv
