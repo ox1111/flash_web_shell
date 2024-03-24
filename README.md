@@ -96,7 +96,6 @@ python3 app.py
 
 [+] iphone에서 5000 포트 사용하고 있다고 하면 
 
-[+] lsof 설치
 
 ```
 apt install lsof
