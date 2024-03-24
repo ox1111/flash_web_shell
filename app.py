@@ -42,10 +42,10 @@ def download(path):
 
     # 현재 작업 디렉토리(pwd) 경로 제거
     current_dir = os.getcwd()
-    normalized_path = normalized_path.replace(current_dir, '/')
+    path = path.replace(current_dir, '/')
     
     # 경로에서 연속된 슬래시를 단일 슬래시로 대체
-    normalized_path = re.sub(r'/+', '/', path)
+    normalized_path = '/' + re.sub(r'/+', '/', path)
     
     # 파일의 존재 여부 확인
     if not os.path.isfile(normalized_path):
