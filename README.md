@@ -34,13 +34,6 @@ root/alpine
 [+] wget 설치
 
 ```
-apt install lsof
-```
-
-
-[+] wget 설치
-
-```
 apt install wget
 ```
 
@@ -102,6 +95,13 @@ python3 app.py
 ```
 
 [+] iphone에서 5000 포트 사용하고 있다고 하면 
+
+[+] lsof 설치
+
+```
+apt install lsof
+```
+
 ```
 lsof -i :5000
 ```
