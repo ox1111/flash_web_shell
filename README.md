@@ -24,8 +24,8 @@ iproxy 2222(macbook port ) ->  22(iphone port )
 
 iproxy 2222(macbook port ) [ 2222 포트 리스닝 server 역활 ]-> 22(iphone port : client역활 )
 
-ssh -p 2222 root@localhost  [ 2222 서버 포트 연결 ] -> iproxy 2222(macbook port ) [ 2222 포트 리스닝 server 역활 ]
- -> 22(iphone port : client역활 ) -> ssl server demon연결(22 포트 리스닝)
+macbook에서 ssh 명령:  ssh -p 2222 root@localhost  [ 2222 서버 포트 연결 ] -> iproxy 2222(macbook port ) [ 2222 포트 리스닝 server 역활 ]
+ -> 22(iphone port : client역활 ) -> ssl server demon연결(22 포트 리스닝) : iphoned에서 ssl server demon
 
 
 iproxy 2222 22
